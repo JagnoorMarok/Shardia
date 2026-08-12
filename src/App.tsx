@@ -5,6 +5,8 @@ import Services from './pages/Services';
 import Studio from './pages/Studio';
 import Insights from './pages/Insights';
 import Contact from './pages/Contact';
+import Privacy from './pages/Privacy';
+import Terms from './pages/Terms';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
@@ -22,6 +24,8 @@ function AnimatedRoutes() {
         <Route path="/studio" element={<OSWindow><Studio /></OSWindow>} />
         <Route path="/insights" element={<OSWindow><Insights /></OSWindow>} />
         <Route path="/contact" element={<OSWindow><Contact /></OSWindow>} />
+        <Route path="/privacy" element={<OSWindow><Privacy /></OSWindow>} />
+        <Route path="/terms" element={<OSWindow><Terms /></OSWindow>} />
       </Routes>
     </AnimatePresence>
   );

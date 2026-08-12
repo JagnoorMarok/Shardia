@@ -73,8 +73,8 @@ const Footer = () => {
       }}>
         <p>&copy; {new Date().getFullYear()} Shardia. All rights reserved.</p>
         <div style={{ display: 'flex', gap: '2rem' }}>
-          <a onClick={e => e.preventDefault()} style={{ cursor: 'pointer', transition: 'color 0.2s' }} onMouseOver={e=>e.currentTarget.style.color='#fff'} onMouseOut={e=>e.currentTarget.style.color='var(--color-text-muted)'}>Privacy Policy</a>
-          <a onClick={e => e.preventDefault()} style={{ cursor: 'pointer', transition: 'color 0.2s' }} onMouseOver={e=>e.currentTarget.style.color='#fff'} onMouseOut={e=>e.currentTarget.style.color='var(--color-text-muted)'}>Terms of Service</a>
+          <Link to="/privacy" style={{ cursor: 'pointer', transition: 'color 0.2s', color: 'var(--color-text-muted)' }} onMouseOver={e=>e.currentTarget.style.color='#fff'} onMouseOut={e=>e.currentTarget.style.color='var(--color-text-muted)'}>Privacy Policy</Link>
+          <Link to="/terms" style={{ cursor: 'pointer', transition: 'color 0.2s', color: 'var(--color-text-muted)' }} onMouseOver={e=>e.currentTarget.style.color='#fff'} onMouseOut={e=>e.currentTarget.style.color='var(--color-text-muted)'}>Terms of Service</Link>
         </div>
       </div>
     </footer>
