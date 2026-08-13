@@ -33,19 +33,25 @@ const Home = () => {
       <section style={{ position: 'fixed', width: '100vw', height: '100vh', zIndex: 10, pointerEvents: 'none', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
 
         {/* Phase 1: Landing Interface */}
-        <div style={{
-          position: 'absolute',
-          top: 0, left: 0, width: '100%', height: '100%',
+        <div className="hero-content" style={{
           opacity: heroOpacity,
-          transition: 'opacity 0.5s',
-          display: 'flex',
-          justifyContent: 'space-between',
-          padding: 'clamp(2rem, 5vw, 4rem)',
-          boxSizing: 'border-box',
-          pointerEvents: 'none'
+          transition: 'opacity 0.5s'
         }}>
+          {/* Mobile Only: Small Top-Left Branding */}
+          <div className="hero-mobile-branding">
+            <h1>SHARDIA</h1>
+            <h2>Web Solutions Agency</h2>
+          </div>
+
+          {/* Mobile Only: Small Bottom-Center Tagline in Glass */}
+          <div className="hero-mobile-tagline">
+            <p>
+              Engineering scalable web applications, immersive digital experiences, and robust technical infrastructure for ambitious brands.
+            </p>
+          </div>
+
           {/* Left Side: Identity */}
-          <div style={{ marginTop: '25vh', maxWidth: '350px', textAlign: 'left' }}>
+          <div className="hero-left">
             <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', margin: 0, color: '#fff', letterSpacing: '-0.02em', lineHeight: 1 }}>SHARDIA</h1>
             <h2 style={{ fontSize: 'clamp(0.8rem, 2vw, 1rem)', color: 'rgba(255,140,0,1)', textTransform: 'uppercase', letterSpacing: '2px', margin: '0.5rem 0 2rem', fontWeight: 600 }}>Web Solutions Agency</h2>
             <p style={{ color: 'var(--color-text-muted)', fontSize: '1.1rem', lineHeight: 1.6 }}>
@@ -54,7 +60,7 @@ const Home = () => {
           </div>
           
           {/* Right Side: Tech Specs */}
-          <div style={{ marginTop: '25vh', maxWidth: '300px', textAlign: 'right', fontFamily: 'monospace' }}>
+          <div className="hero-right">
             <div style={{ color: 'rgba(255,140,0,1)', fontSize: '0.85rem', marginBottom: '1.5rem', letterSpacing: '2px' }}>[ CORE SYSTEMS ]</div>
             
             <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '2rem', color: '#fff', marginBottom: '1rem', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '0.5rem' }}>
