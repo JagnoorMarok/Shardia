@@ -41,7 +41,7 @@ function App() {
       <Navbar />
       
       {/* Global Background Canvas */}
-      <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 0, pointerEvents: 'none' }}>
+      <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 0, pointerEvents: 'none', opacity: location.pathname === '/' ? 0.5 : 1 }}>
         <ShardCanvas route={location.pathname} />
       </div>
       
