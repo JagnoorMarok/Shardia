@@ -120,6 +120,10 @@ baseCenter: Point3D;
       mouseOffsetX: number;
       mouseOffsetY: number;
       mouseOffsetZ: number;
+      textOffsetX: number;
+      textOffsetY: number;
+      textOffsetZ: number;
+      explosionMultiplier: number;
 
       constructor(index: number) {
         const phi = Math.acos(-1 + (2 * Math.random()));
@@ -170,15 +174,15 @@ baseCenter: Point3D;
           z: (Math.random() - 0.5) * 50 - 200
         };
 
-        this.orbitSpeed = (Math.random() - 0.5) * 0.04;
+        this.orbitSpeed = (Math.random() - 0.5) * 0.015;
         
         this.rotX = Math.random() * Math.PI * 2;
         this.rotY = Math.random() * Math.PI * 2;
         this.rotZ = Math.random() * Math.PI * 2;
         
-        this.spinX = (Math.random() - 0.5) * 0.05;
-        this.spinY = (Math.random() - 0.5) * 0.05;
-        this.spinZ = (Math.random() - 0.5) * 0.05;
+        this.spinX = (Math.random() - 0.5) * 0.015;
+        this.spinY = (Math.random() - 0.5) * 0.015;
+        this.spinZ = (Math.random() - 0.5) * 0.015;
 
         this.scale = Math.random() * 15 + 10;
 
@@ -220,6 +224,11 @@ baseCenter: Point3D;
         this.mouseOffsetX = 0;
         this.mouseOffsetY = 0;
         this.mouseOffsetZ = 0;
+        this.textOffsetX = 0;
+        this.textOffsetY = 0;
+        this.textOffsetZ = 0;
+        // ~25% of shards survive the explosion to remain in the background
+        this.explosionMultiplier = Math.random() > 0.75 ? 0.05 + Math.random() * 0.1 : 1.0 + Math.random() * 0.5;
       }
 
       getRenderData(time: number, scrollProgress: number, mouse: any, cx: number, cy: number, rotationX: number, rotationY: number, modeWeights: any, activeMode: string) {
@@ -253,27 +262,49 @@ baseCenter: Point3D;
           z: homeCenter.z * modeWeights.HOME + this.circuitPosition.z * modeWeights.WORK + this.cardPosition.z * modeWeights.STUDIO + this.nodePosition.z * modeWeights.INSIGHTS
         };
 
+        // Expansion (Deploy explosion at the very end of the narrative)
+        const explodeFactor = activeMode === 'HOME' ? Math.min(Math.max((scrollProgress - 0.9) / 0.1, 0), 1) : 0;
+        const survivorFactor = Math.max(0, 1 - this.explosionMultiplier);
+
+        // Let survivors break free from the grid and drift gracefully in the background
+        if (activeMode === 'HOME' && explodeFactor > 0) {
+            targetCenter.x += Math.sin(time * this.orbitSpeed * 0.5 + this.baseCenter.x) * 300 * explodeFactor * survivorFactor;
+            targetCenter.y += Math.cos(time * this.orbitSpeed * 0.5 + this.baseCenter.y) * 300 * explodeFactor * survivorFactor;
+            targetCenter.z += 800 * explodeFactor * survivorFactor; // push deep into the background (positive Z)
+        }
+
         // Mode-specific rotations (flatten in non-HOME modes)
         const nonHomeWeight = modeWeights.WORK + modeWeights.STUDIO + modeWeights.INSIGHTS;
         
         // If in Cloud phase (p3) OR non-home mode, align rotations to face forward
-        const flattenFactor = Math.min(p3 * modeWeights.HOME + nonHomeWeight, 1);
+        let flattenFactor = Math.min(p3 * modeWeights.HOME + nonHomeWeight, 1);
         
-        this.rotX += this.spinX * (1 - flattenFactor);
-        this.rotY += this.spinY * (1 - flattenFactor);
-        this.rotZ += this.spinZ * (1 - flattenFactor);
+        let spinMultiplier = 1.0;
+        if (activeMode === 'HOME' && explodeFactor > 0) {
+            // Survivors start spinning again, but very slowly and gracefully
+            flattenFactor = Math.max(0, flattenFactor - (explodeFactor * survivorFactor));
+            spinMultiplier = 0.2; // 5x slower spin
+        }
+        
+        this.rotX += this.spinX * spinMultiplier * (1 - flattenFactor);
+        this.rotY += this.spinY * spinMultiplier * (1 - flattenFactor);
+        this.rotZ += this.spinZ * spinMultiplier * (1 - flattenFactor);
         
         const targetRotX = lerp(this.rotX, 0, flattenFactor);
         const targetRotY = lerp(this.rotY, 0, flattenFactor);
         const targetRotZ = lerp(this.rotZ, 0, flattenFactor);
-
-
-        // Expansion (Deploy explosion at the very end of the narrative)
-        const explodeFactor = activeMode === 'HOME' ? Math.min(Math.max((scrollProgress - 0.9) / 0.1, 0), 1) : 0;
         
         // Use baseCenter to determine explosion direction, so it explodes uniformly in all directions
         const distToOrigin = Math.sqrt(this.baseCenter.x**2 + this.baseCenter.y**2 + this.baseCenter.z**2);
         const dir = distToOrigin > 0 ? { x: this.baseCenter.x/distToOrigin, y: this.baseCenter.y/distToOrigin, z: this.baseCenter.z/distToOrigin } : {x:0,y:0,z:1};
+
+        // Pre-calculate projection for collisions
+        let centerRot = { ...targetCenter };
+        centerRot = rotateY(centerRot, rotationY);
+        centerRot = rotateX(centerRot, rotationX);
+        const fov = 1000;
+        const projX = cx + centerRot.x * (fov / (fov + centerRot.z));
+        const projY = cy + centerRot.y * (fov / (fov + centerRot.z));
 
         // Per-shard mouse collision
         let targetMouseOffsetX = 0;
@@ -281,13 +312,6 @@ baseCenter: Point3D;
         let targetMouseOffsetZ = 0;
         
         if (mouse.active) {
-            let centerRot = { ...targetCenter };
-            centerRot = rotateY(centerRot, rotationY);
-            centerRot = rotateX(centerRot, rotationX);
-            const fov = 1000;
-            const projX = cx + centerRot.x * (fov / (fov + centerRot.z));
-            const projY = cy + centerRot.y * (fov / (fov + centerRot.z));
-            
             const dx = projX - mouse.x;
             const dy = projY - mouse.y;
             const dist = Math.sqrt(dx*dx + dy*dy);
@@ -300,16 +324,42 @@ baseCenter: Point3D;
                 targetMouseOffsetZ = force * 200; // push backwards
             }
         }
+
+        // Per-shard text collision
+        let targetTextOffsetX = 0;
+        let targetTextOffsetY = 0;
+        let targetTextOffsetZ = 0;
+
+        if (activeMode === 'HOME') {
+            const tDx = projX - cx;
+            const tDy = projY - cy;
+            // Elliptical distance metric: text is wider than it is tall
+            const tDist = Math.sqrt((tDx * 0.35)**2 + tDy**2);
+            const tRadius = 130; // Repulsion threshold
+
+            if (tDist < tRadius && tDist > 0.1) {
+                const force = Math.pow((tRadius - tDist) / tRadius, 2);
+                const actualDist = Math.sqrt(tDx*tDx + tDy*tDy);
+                // Push them firmly outwards in X/Y and backwards in Z
+                targetTextOffsetX = (tDx / actualDist) * force * 400;
+                targetTextOffsetY = (tDy / actualDist) * force * 200;
+                targetTextOffsetZ = force * 300; 
+            }
+        }
         
         // Lerp the offset for smooth collision
         this.mouseOffsetX += (targetMouseOffsetX - this.mouseOffsetX) * 0.15;
         this.mouseOffsetY += (targetMouseOffsetY - this.mouseOffsetY) * 0.15;
         this.mouseOffsetZ += (targetMouseOffsetZ - this.mouseOffsetZ) * 0.15;
 
+        this.textOffsetX += (targetTextOffsetX - this.textOffsetX) * 0.1;
+        this.textOffsetY += (targetTextOffsetY - this.textOffsetY) * 0.1;
+        this.textOffsetZ += (targetTextOffsetZ - this.textOffsetZ) * 0.1;
+
         const currentCenter = {
-          x: targetCenter.x + dir.x * (Math.pow(explodeFactor, 2) * 8.0) * 300 + this.mouseOffsetX,
-          y: targetCenter.y + dir.y * (Math.pow(explodeFactor, 2) * 8.0) * 300 + this.mouseOffsetY,
-          z: targetCenter.z + dir.z * (Math.pow(explodeFactor, 2) * 8.0) * 300 + this.mouseOffsetZ
+          x: targetCenter.x + dir.x * (Math.pow(explodeFactor, 2) * 8.0) * 300 * this.explosionMultiplier + this.mouseOffsetX + this.textOffsetX,
+          y: targetCenter.y + dir.y * (Math.pow(explodeFactor, 2) * 8.0) * 300 * this.explosionMultiplier + this.mouseOffsetY + this.textOffsetY,
+          z: targetCenter.z + dir.z * (Math.pow(explodeFactor, 2) * 8.0) * 300 * this.explosionMultiplier + this.mouseOffsetZ + this.textOffsetZ
         };
 
 
@@ -388,8 +438,8 @@ baseCenter: Point3D;
       
       // Constant slow rotation if mouse inactive
       if (!mouse.active) {
-        targetRotationY += 0.005 * parallaxDampener;
-        targetRotationX += 0.002 * parallaxDampener;
+        targetRotationY += 0.002 * parallaxDampener;
+        targetRotationX += 0.001 * parallaxDampener;
       }
 
       const fov = 1000;

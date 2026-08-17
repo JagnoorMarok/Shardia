@@ -7,52 +7,64 @@ interface ScrambleTextProps {
   style?: React.CSSProperties;
 }
 
-const CHARS = '!<>-_\\\\/[]{}—=+*^?#________';
-
 const ScrambleText: React.FC<ScrambleTextProps> = ({ text, className, style }) => {
-  const [displayText, setDisplayText] = useState(text);
+  const [typedIndex, setTypedIndex] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: false, margin: "-10% 0px" });
 
   useEffect(() => {
     if (!isInView) {
-      setDisplayText(text); // reset when out of view
+      setTypedIndex(0); // reset when out of view
       return;
     }
 
-    let iteration = 0;
     let interval: number;
 
-    const maxIterations = text.length;
+    // A small delay before typing starts feels more natural
+    const timeout = setTimeout(() => {
+      interval = window.setInterval(() => {
+        setTypedIndex((prev) => {
+          if (prev >= text.length) {
+            clearInterval(interval);
+            return prev;
+          }
+          return prev + 1;
+        });
+      }, 50); // 50ms per letter typing speed
+    }, 200);
 
-    interval = window.setInterval(() => {
-      setDisplayText(() =>
-        text
-          .split('')
-          .map((letter, index) => {
-            if (index < iteration) {
-              return text[index];
-            }
-            // Preserve spaces
-            if (letter === ' ') return ' ';
-            return CHARS[Math.floor(Math.random() * CHARS.length)];
-          })
-          .join('')
-      );
-
-      if (iteration >= maxIterations) {
-        clearInterval(interval);
-      }
-      
-      iteration += 1 / 2; // Slower reveal (takes 2 ticks per letter)
-    }, 30);
-
-    return () => clearInterval(interval);
+    return () => {
+      clearTimeout(timeout);
+      clearInterval(interval);
+    };
   }, [isInView, text]);
 
   return (
-    <span ref={ref} className={className} style={style}>
-      {displayText}
+    <span ref={ref} className={className} style={{ position: 'relative', display: 'inline-block', ...style }}>
+      {text.split('').map((char, index) => (
+        <span 
+          key={index} 
+          style={{ 
+            opacity: index < typedIndex ? 1 : 0, 
+            visibility: index < typedIndex ? 'visible' : 'hidden'
+          }}
+        >
+          {char === ' ' ? '\u00A0' : char}
+        </span>
+      ))}
+      {/* Orange typing cursor */}
+      <span 
+        style={{
+          display: 'inline-block',
+          width: '0.15em',
+          height: '1em',
+          backgroundColor: 'rgba(255, 140, 0, 1)',
+          verticalAlign: 'text-bottom',
+          marginLeft: '4px',
+          opacity: typedIndex >= text.length ? 0 : 1, // Hides cursor when typing is completely finished
+          transition: 'opacity 0.3s'
+        }} 
+      />
     </span>
   );
 };
