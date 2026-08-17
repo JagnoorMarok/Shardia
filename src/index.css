@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&display=swap');
 @import './styles/theme.css';
 
 /* Base Reset */
@@ -11,7 +10,7 @@
 html, body {
   width: 100%;
   min-height: 100vh;
-  overflow-x: hidden;
+  overflow-x: clip; /* Fixes position: sticky breaking on child elements while still preventing horizontal scroll */
   background-color: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-sans);
@@ -199,11 +198,107 @@ h2 {
     border: 1px solid rgba(255, 255, 255, 0.08);
   }
 
-  .hero-mobile-tagline p {
+.hero-mobile-tagline p {
     color: var(--color-text-muted);
     font-size: 0.9rem;
     line-height: 1.5;
     margin: 0;
   }
+}
+
+/* Liquid UI Component Styles */
+@keyframes liquidBlob {
+  0%   { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; transform: rotate(0deg) scale(1); }
+  34%  { border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%; transform: rotate(120deg) scale(1.05); }
+  67%  { border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%; transform: rotate(240deg) scale(0.95); }
+  100% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; transform: rotate(360deg) scale(1); }
+}
+
+.liquid-card {
+  position: relative;
+  border-radius: 40px;
+  background: rgba(15, 15, 20, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 1.5rem 2rem 1.5rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  overflow: hidden;
+  box-shadow: inset 0 0 40px rgba(0,0,0,0.5), 0 20px 40px rgba(0,0,0,0.4);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s;
+}
+
+.liquid-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: inset 0 0 40px rgba(0,0,0,0.5), 0 30px 60px rgba(0,0,0,0.6);
+}
+
+.liquid-icon-container {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.liquid-glow {
+  position: absolute;
+  inset: -6px;
+  background: linear-gradient(
+    135deg,
+    #ffdf99 0%,   /* Very light orange/peach highlight */
+    #ff8c00 25%,  /* Bright Orange */
+    #ff4500 50%,  /* Deep Orange */
+    #cc3300 75%,  /* Dark Burned Orange */
+    #ff8c00 100%  /* Bright Orange */
+  );
+  animation: liquidBlob 8s linear infinite;
+  z-index: -2;
+}
+
+.liquid-glow.blur {
+  filter: blur(12px);
+  opacity: 0.6;
+  inset: -4px;
+  transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+.liquid-card:hover .liquid-glow.blur {
+  opacity: 1;
+  filter: blur(18px);
+}
+
+.liquid-icon-bg {
+  position: absolute;
+  inset: 2px;
+  border-radius: 50%;
+  /* Orange Chrome Metallic Paint Finish */
+  background: 
+    linear-gradient(
+      to bottom,
+      #ffa500 0%,      /* Bright sky reflection */
+      #ff6a00 48%,     /* Horizon line top */
+      #4a1500 50%,     /* Dark horizon split */
+      #b33c00 52%,     /* Horizon line bottom reflection */
+      #1a0500 100%     /* Deep ground shadow */
+    );
+  box-shadow: 
+    inset 0 2px 4px rgba(255,255,255,0.5), /* Sharp rim light */
+    inset 0 -8px 15px rgba(0,0,0,0.9);     /* Bottom volume shadow */
+  z-index: -1;
+}
+
+.liquid-outer-rim {
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  pointer-events: none;
 }
 

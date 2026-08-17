@@ -6,6 +6,8 @@ import MagneticButton from '../components/MagneticButton';
 import ScrambleText from '../components/ScrambleText';
 import { useScrollProgress } from '../hooks/useScrollProgress';
 import { ScrollReveal, RevealItem } from '../components/ScrollReveal';
+import MethodologyCuboid from '../components/MethodologyCuboid';
+import LiquidCard from '../components/LiquidCard';
 
 const Home = () => {
   const scrollY = useScrollProgress();
@@ -124,7 +126,7 @@ const Home = () => {
       <div style={{
         position: 'relative',
         zIndex: 20,
-        background: 'linear-gradient(to bottom, rgba(5,5,8,0) 0%, rgba(5,5,8,1) 15%, rgba(5,5,8,1) 100%)',
+        background: 'transparent',
         paddingTop: '15vh',
         paddingBottom: '10rem',
       }}>
@@ -147,56 +149,24 @@ const Home = () => {
             <h3 style={{ fontSize: '2.5rem', marginBottom: '4rem', color: '#fff', textAlign: 'center', letterSpacing: '-0.02em' }}><ScrambleText text="How We Drive Value" /></h3>
           </ScrollReveal>
 
-          <ScrollReveal staggerChildren direction="up" className="grid-container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+          <ScrollReveal staggerChildren direction="up" className="grid-container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(450px, 1fr))', gap: '3rem' }}>
             {[
-              { icon: <Layers color="rgba(255, 140, 0, 1)" size={28} />, title: "Technical Strategy", desc: "Aligning software architecture directly with your ROI and business objectives to ensure maximum leverage." },
-              { icon: <Zap color="rgba(255, 140, 0, 1)" size={28} />, title: "High-Performance Engineering", desc: "Building blazing fast, conversion-optimized applications that leave your competitors behind." },
-              { icon: <Hexagon color="rgba(255, 140, 0, 1)" size={28} />, title: "Premium UX/UI", desc: "Crafting immersive, frictionless user journeys that increase retention and drive sales." },
-              { icon: <Code color="rgba(255, 140, 0, 1)" size={28} />, title: "Legacy Rescue", desc: "Modernizing outdated, slow systems into agile platforms without disrupting your daily operations." },
-              { icon: <Cpu color="rgba(255, 140, 0, 1)" size={28} />, title: "Cloud Architecture", desc: "Deploying secure, auto-scaling infrastructure so your platform never goes down during traffic spikes." },
-              { icon: <Globe color="rgba(255, 140, 0, 1)" size={28} />, title: "Growth & Iteration", desc: "Providing continuous feature development and A/B testing post-launch to keep compounding your success." }
+              { icon: <Layers color="#fff" size={32} />, title: "Technical Strategy", desc: "Aligning software architecture directly with your ROI and business objectives to ensure maximum leverage." },
+              { icon: <Zap color="#fff" size={32} />, title: "High-Performance Engineering", desc: "Building blazing fast, conversion-optimized applications that leave your competitors behind." },
+              { icon: <Hexagon color="#fff" size={32} />, title: "Premium UX/UI", desc: "Crafting immersive, frictionless user journeys that increase retention and drive sales." },
+              { icon: <Code color="#fff" size={32} />, title: "Legacy Rescue", desc: "Modernizing outdated, slow systems into agile platforms without disrupting your daily operations." },
+              { icon: <Cpu color="#fff" size={32} />, title: "Cloud Architecture", desc: "Deploying secure, auto-scaling infrastructure so your platform never goes down during traffic spikes." },
+              { icon: <Globe color="#fff" size={32} />, title: "Growth & Iteration", desc: "Providing continuous feature development and A/B testing post-launch to keep compounding your success." }
             ].map((feat, i) => (
               <RevealItem key={i}>
-                <GlassCard style={{ textAlign: 'left', height: '100%', display: 'flex', flexDirection: 'column' }}>
-                  <div style={{ marginBottom: '1.5rem', display: 'inline-block', padding: '1rem', background: 'rgba(255, 140, 0, 0.1)', borderRadius: '50%', width: 'fit-content' }}>
-                    {feat.icon}
-                  </div>
-                  <h4 style={{ fontSize: '1.4rem', marginBottom: '1rem', color: '#fff', fontWeight: 600 }}>{feat.title}</h4>
-                  <p style={{ color: 'var(--color-text-muted)', fontSize: '1.05rem', lineHeight: 1.6, flexGrow: 1 }}>{feat.desc}</p>
-                </GlassCard>
+                <LiquidCard icon={feat.icon} title={feat.title} desc={feat.desc} />
               </RevealItem>
             ))}
           </ScrollReveal>
         </section>
 
-        {/* Our Process Section */}
-        <section style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 2rem', marginBottom: '12rem' }}>
-          <ScrollReveal direction="up" style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <h3 style={{ fontSize: '2.5rem', color: '#fff', letterSpacing: '-0.02em', marginBottom: '0.5rem' }}><ScrambleText text="Our Methodology" /></h3>
-            <p style={{ color: 'var(--color-text-muted)', fontSize: '1.1rem' }}>A battle-tested process for predictable, high-quality delivery.</p>
-          </ScrollReveal>
-          
-          <ScrollReveal staggerChildren direction="up" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '2rem' }}>
-            {[
-              { num: '01', title: 'Discovery', desc: 'Deep dive into your business model, identifying technical bottlenecks and defining success metrics.' },
-              { num: '02', title: 'Architecture', desc: 'Designing a scalable, secure, and performant technical foundation tailored to your specific needs.' },
-              { num: '03', title: 'Execution', desc: 'Agile sprints delivering functional software rapidly, with constant feedback loops and transparent communication.' },
-              { num: '04', title: 'Scale', desc: 'Post-launch optimization, continuous monitoring, and iterative feature development to drive compounding growth.' }
-            ].map((step, i) => (
-              <RevealItem key={i}>
-                <GlassCard style={{ height: '100%', position: 'relative', overflow: 'hidden' }}>
-                  <div style={{ position: 'absolute', top: '-1rem', right: '-1rem', fontSize: '6rem', fontWeight: 800, color: 'rgba(255, 140, 0, 0.05)', lineHeight: 1, pointerEvents: 'none' }}>
-                    {step.num}
-                  </div>
-                  <h4 style={{ fontSize: '1.4rem', color: '#fff', marginBottom: '1rem', position: 'relative', zIndex: 1 }}>{step.title}</h4>
-                  <p style={{ color: 'var(--color-text-muted)', fontSize: '1.05rem', lineHeight: 1.6, position: 'relative', zIndex: 1 }}>
-                    {step.desc}
-                  </p>
-                </GlassCard>
-              </RevealItem>
-            ))}
-          </ScrollReveal>
-        </section>
+        {/* Our Process Section (3D Cuboid) */}
+        <MethodologyCuboid />
 
         {/* Maintenance Plans */}
         <section style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 2rem', marginBottom: '10rem' }}>
