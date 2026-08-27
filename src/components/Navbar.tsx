@@ -1,23 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Command, Cpu, LayoutGrid, TerminalSquare, Zap } from 'lucide-react';
+import { Menu, X, Command, Cpu, LayoutGrid, TerminalSquare, Zap, Home } from 'lucide-react';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [timeStr, setTimeStr] = useState("");
   const location = useLocation();
-  useEffect(() => {
-    const updateTime = () => setTimeStr(new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
-    updateTime();
-    const interval = setInterval(updateTime, 1000);
-    return () => clearInterval(interval);
-  }, []);
 
   const navOpacity = 1;
   const navPointerEvents = 'auto';
 
   const getIcon = (item: string) => {
     switch(item) {
+      case 'Home': return <Home size={14} />;
       case 'Services': return <Cpu size={14} />;
       case 'Work': return <LayoutGrid size={14} />;
       case 'Studio': return <TerminalSquare size={14} />;
@@ -71,14 +65,16 @@ const Navbar = () => {
 
         {/* Desktop Nav Links / Modules */}
         <div className="nav-links" style={{ display: 'flex', gap: '2rem' }}>
-          {['Services', 'Studio', 'Insights'].map((item) => (
+          {['Home', 'Services', 'Studio', 'Insights'].map((item) => {
+            const path = item === 'Home' ? '/' : `/${item.toLowerCase()}`;
+            return (
             <Link 
               key={item} 
-              to={`/${item.toLowerCase()}`}
+              to={path}
               style={{
                 fontFamily: 'monospace',
                 fontSize: '0.85rem',
-                color: location.pathname === `/${item.toLowerCase()}` ? '#fff' : 'var(--color-text-muted)',
+                color: location.pathname === path ? '#fff' : 'var(--color-text-muted)',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '0.4rem',
@@ -87,7 +83,7 @@ const Navbar = () => {
               }}
               onMouseOver={(e) => e.currentTarget.style.color = '#fff'}
               onMouseOut={(e) => {
-                if (location.pathname !== `/${item.toLowerCase()}`) {
+                if (location.pathname !== path) {
                   e.currentTarget.style.color = 'var(--color-text-muted)';
                 }
               }}
@@ -95,14 +91,11 @@ const Navbar = () => {
               {getIcon(item)}
               [{item.toUpperCase()}]
             </Link>
-          ))}
+          )})}
         </div>
 
         {/* System Tray / Initiate */}
         <div className="nav-tray" style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-          <span style={{ fontFamily: 'monospace', fontSize: '0.8rem', color: 'var(--color-text-muted)' }}>
-            {timeStr}
-          </span>
           <Link to="/contact" className="nav-cta" style={{
             padding: '0.4rem 1rem',
             borderRadius: '4px',
@@ -129,7 +122,7 @@ const Navbar = () => {
           }}
           >
             <Zap size={14} />
-            EXE
+            BUY SERVICES
           </Link>
         </div>
 
@@ -159,16 +152,18 @@ const Navbar = () => {
           <div style={{ fontFamily: 'monospace', color: 'var(--color-text-muted)', marginBottom: '2rem' }}>
             SYSTEM MODULES
           </div>
-          {['Services', 'Studio', 'Insights'].map((item) => (
+          {['Home', 'Services', 'Studio', 'Insights'].map((item) => {
+            const path = item === 'Home' ? '/' : `/${item.toLowerCase()}`;
+            return (
             <Link 
               key={item} 
-              to={`/${item.toLowerCase()}`}
+              to={path}
               onClick={() => setIsMobileMenuOpen(false)}
               style={{
                 fontFamily: 'monospace',
                 fontSize: '1.5rem',
                 fontWeight: 700,
-                color: location.pathname === `/${item.toLowerCase()}` ? 'rgba(255, 140, 0, 1)' : '#fff',
+                color: location.pathname === path ? 'rgba(255, 140, 0, 1)' : '#fff',
                 letterSpacing: '2px',
                 textDecoration: 'none',
                 display: 'flex',
@@ -179,7 +174,7 @@ const Navbar = () => {
               {getIcon(item)}
               {item.toUpperCase()}
             </Link>
-          ))}
+          )})}
           
           <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)} style={{
             marginTop: '2rem',
@@ -199,7 +194,7 @@ const Navbar = () => {
             gap: '0.5rem'
           }}>
             <Zap size={18} />
-            INITIATE
+            BUY SERVICES
           </Link>
         </div>
       )}
