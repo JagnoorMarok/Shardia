@@ -53,8 +53,8 @@ const Footer = () => {
         {/* Contact */}
         <div>
           <h4 style={{ color: '#fff', marginBottom: '1.5rem', letterSpacing: '2px', textTransform: 'uppercase', fontSize: '0.9rem' }}>Connect</h4>
-          <p style={{ color: 'var(--color-text-muted)', marginBottom: '0.5rem' }}>hello@shardia.dev</p>
-          <p style={{ color: 'var(--color-text-muted)' }}>+1 (555) 019-2837</p>
+          <p style={{ color: 'var(--color-text-muted)', marginBottom: '0.5rem' }}>jagnoormarok@gmail.com</p>
+          <p style={{ color: 'var(--color-text-muted)' }}>+91 9814078213</p>
         </div>
       </div>
 

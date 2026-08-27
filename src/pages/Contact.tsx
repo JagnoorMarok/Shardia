@@ -198,13 +198,13 @@ ${formData.description}
                 {/* Phone */}
                 <div>
                   <label style={labelStyle}>Phone</label>
-                  <input type="tel" name="phone" value={formData.phone} onChange={handleChange} style={inputStyle} placeholder="+1 (555) 000-0000" />
+                  <input type="tel" name="phone" value={formData.phone} onChange={handleChange} style={inputStyle} placeholder="+91 9814078213" />
                 </div>
 
                 {/* Email */}
                 <div>
                   <label style={labelStyle}>Email</label>
-                  <input type="email" name="email" value={formData.email} onChange={handleChange} style={inputStyle} required placeholder="hello@nexusdynamics.com" />
+                  <input type="email" name="email" value={formData.email} onChange={handleChange} style={inputStyle} required placeholder="jagnoormarok@gmail.com" />
                 </div>
               </div>
 
