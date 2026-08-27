@@ -1,12 +1,7 @@
+import React, { Suspense } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
-import Home from './pages/Home';
-import Services from './pages/Services';
-import Studio from './pages/Studio';
-import Insights from './pages/Insights';
-import Contact from './pages/Contact';
-import Privacy from './pages/Privacy';
-import Terms from './pages/Terms';
+
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
@@ -14,19 +9,30 @@ import OSWindow from './components/OSWindow';
 import ShardCanvas from './components/ShardCanvas';
 import CustomCursor from './components/CustomCursor';
 
+// Lazy load pages for code splitting
+const Home = React.lazy(() => import('./pages/Home'));
+const Services = React.lazy(() => import('./pages/Services'));
+const Studio = React.lazy(() => import('./pages/Studio'));
+const Insights = React.lazy(() => import('./pages/Insights'));
+const Contact = React.lazy(() => import('./pages/Contact'));
+const Privacy = React.lazy(() => import('./pages/Privacy'));
+const Terms = React.lazy(() => import('./pages/Terms'));
+
 function AnimatedRoutes() {
   const location = useLocation();
   return (
     <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<OSWindow><Home /></OSWindow>} />
-        <Route path="/services" element={<OSWindow><Services /></OSWindow>} />
-        <Route path="/studio" element={<OSWindow><Studio /></OSWindow>} />
-        <Route path="/insights" element={<OSWindow><Insights /></OSWindow>} />
-        <Route path="/contact" element={<OSWindow><Contact /></OSWindow>} />
-        <Route path="/privacy" element={<OSWindow><Privacy /></OSWindow>} />
-        <Route path="/terms" element={<OSWindow><Terms /></OSWindow>} />
-      </Routes>
+      <Suspense fallback={<div style={{ height: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}></div>}>
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<OSWindow><Home /></OSWindow>} />
+          <Route path="/services" element={<OSWindow><Services /></OSWindow>} />
+          <Route path="/studio" element={<OSWindow><Studio /></OSWindow>} />
+          <Route path="/insights" element={<OSWindow><Insights /></OSWindow>} />
+          <Route path="/contact" element={<OSWindow><Contact /></OSWindow>} />
+          <Route path="/privacy" element={<OSWindow><Privacy /></OSWindow>} />
+          <Route path="/terms" element={<OSWindow><Terms /></OSWindow>} />
+        </Routes>
+      </Suspense>
     </AnimatePresence>
   );
 }

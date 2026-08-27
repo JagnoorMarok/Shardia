@@ -192,7 +192,7 @@ ${formData.description}
                 {/* Business Name */}
                 <div>
                   <label style={labelStyle}>Business Name</label>
-                  <input type="text" name="businessName" value={formData.businessName} onChange={handleChange} style={inputStyle} required placeholder="Acme Corp" />
+                  <input type="text" name="businessName" value={formData.businessName} onChange={handleChange} style={inputStyle} required placeholder="Nexus Dynamics" />
                 </div>
 
                 {/* Phone */}
@@ -204,7 +204,7 @@ ${formData.description}
                 {/* Email */}
                 <div>
                   <label style={labelStyle}>Email</label>
-                  <input type="email" name="email" value={formData.email} onChange={handleChange} style={inputStyle} required placeholder="hello@acme.com" />
+                  <input type="email" name="email" value={formData.email} onChange={handleChange} style={inputStyle} required placeholder="hello@nexusdynamics.com" />
                 </div>
               </div>
 

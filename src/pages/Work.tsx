@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
 import { ScrollReveal } from '../components/ScrollReveal';
+import PageLayout from '../components/PageLayout';
 
 const projects = [
   { name: "Aether Protocol", tag: "Web3 / DeFi", img: "linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)", metric: "+140% TVL" },
@@ -21,16 +22,10 @@ const Work = () => {
   }, []);
 
   return (
-    <div style={{ paddingTop: '15vh', minHeight: '80vh', paddingBottom: '10rem', overflowX: 'hidden' }}>
-      <div style={{ paddingLeft: '2rem', paddingRight: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
-        <ScrollReveal>
-          <h1 style={{ fontSize: 'clamp(3rem, 6vw, 5rem)', marginBottom: '1rem', color: '#fff', letterSpacing: '-0.02em' }}>Selected Work</h1>
-          <p style={{ fontSize: '1.2rem', color: 'var(--color-text-muted)', marginBottom: '4rem', maxWidth: '600px', lineHeight: 1.8 }}>
-            A curated collection of platforms and digital products engineered by Shardia. We measure success by the growth and ROI we deliver to our partners.
-          </p>
-        </ScrollReveal>
-      </div>
-
+    <PageLayout
+      title="Selected Work"
+      description="A curated collection of platforms and digital products engineered by Shardia. We measure success by the growth and ROI we deliver to our partners."
+    >
       <ScrollReveal delay={0.2}>
         <motion.div 
           ref={carouselRef} 
@@ -78,7 +73,7 @@ const Work = () => {
           &larr; Drag to explore &rarr;
         </div>
       </ScrollReveal>
-    </div>
+    </PageLayout>
   );
 };
 

@@ -1,16 +1,14 @@
+
 import { motion } from 'framer-motion';
 import { ScrollReveal, RevealItem } from '../components/ScrollReveal';
+import PageLayout from '../components/PageLayout';
 
 const Insights = () => {
   return (
-    <div style={{ paddingTop: '15vh', minHeight: '80vh', paddingBottom: '10rem', paddingLeft: '2rem', paddingRight: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
-      <ScrollReveal>
-        <h1 style={{ fontSize: 'clamp(3rem, 6vw, 5rem)', marginBottom: '1rem', color: '#fff', letterSpacing: '-0.02em' }}>Insights</h1>
-        <p style={{ fontSize: '1.2rem', color: 'var(--color-text-muted)', marginBottom: '5rem', maxWidth: '700px', lineHeight: 1.8 }}>
-          Engineering logs, architecture deep-dives, and strategic playbooks on the future of the web. We open-source our knowledge to help other businesses scale.
-        </p>
-      </ScrollReveal>
-
+    <PageLayout
+      title="Insights"
+      description="Engineering logs, architecture deep-dives, and strategic playbooks on the future of the web. We open-source our knowledge to help other businesses scale."
+    >
       <ScrollReveal staggerChildren style={{ display: 'flex', flexDirection: 'column' }}>
         {[
           { title: "Building a Custom WebGL Renderer for High-Performance SaaS", date: "Aug 09, 2026", category: "Engineering", readTime: "8 min read" },
@@ -43,7 +41,7 @@ const Insights = () => {
           </RevealItem>
         ))}
       </ScrollReveal>
-    </div>
+    </PageLayout>
   );
 };
 

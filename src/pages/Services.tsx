@@ -1,16 +1,13 @@
 import GlassCard from '../components/GlassCard';
 import { ScrollReveal, RevealItem } from '../components/ScrollReveal';
+import PageLayout from '../components/PageLayout';
 
 const Services = () => {
   return (
-    <div style={{ paddingTop: '15vh', minHeight: '80vh', paddingBottom: '10rem', paddingLeft: '2rem', paddingRight: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
-      <ScrollReveal>
-        <h1 style={{ fontSize: 'clamp(3rem, 6vw, 5rem)', marginBottom: '1rem', color: '#fff', letterSpacing: '-0.02em' }}>Capabilities</h1>
-        <p style={{ fontSize: '1.2rem', color: 'var(--color-text-muted)', marginBottom: '5rem', maxWidth: '700px', lineHeight: 1.8 }}>
-          We don't sell hours. We sell outcomes. Our capabilities are focused entirely on bridging the gap between your business objectives and scalable technical execution.
-        </p>
-      </ScrollReveal>
-
+    <PageLayout
+      title="Capabilities"
+      description="We don't sell hours. We sell outcomes. Our capabilities are focused entirely on bridging the gap between your business objectives and scalable technical execution."
+    >
       <ScrollReveal staggerChildren style={{ display: 'grid', gap: '4rem' }}>
         
         <RevealItem>
@@ -77,7 +74,7 @@ const Services = () => {
         </RevealItem>
 
       </ScrollReveal>
-    </div>
+    </PageLayout>
   );
 };
 

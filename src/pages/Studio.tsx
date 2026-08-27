@@ -1,15 +1,12 @@
 import { ScrollReveal } from '../components/ScrollReveal';
+import PageLayout from '../components/PageLayout';
 
 const Studio = () => {
   return (
-    <div style={{ paddingTop: '15vh', minHeight: '80vh', paddingBottom: '10rem', paddingLeft: '2rem', paddingRight: '2rem', maxWidth: '1200px', margin: '0 auto' }}>
-      <ScrollReveal>
-        <h1 style={{ fontSize: 'clamp(3rem, 6vw, 5rem)', marginBottom: '1rem', color: '#fff', letterSpacing: '-0.02em' }}>The Studio</h1>
-        <p style={{ fontSize: '1.2rem', color: 'var(--color-text-muted)', marginBottom: '5rem', maxWidth: '700px', lineHeight: 1.8 }}>
-          We are an elite software engineering and design collective. We don't just write code—we architect digital assets that accelerate business growth and outpace the competition.
-        </p>
-      </ScrollReveal>
-
+    <PageLayout
+      title="The Studio"
+      description="We are an elite software engineering and design collective. We don't just write code—we architect digital assets that accelerate business growth and outpace the competition."
+    >
       <div style={{ display: 'flex', flexDirection: 'column', gap: '8rem' }}>
         
         <ScrollReveal direction="up" style={{ display: 'flex', flexWrap: 'wrap', gap: '4rem', alignItems: 'center' }}>
@@ -48,7 +45,7 @@ const Studio = () => {
         </ScrollReveal>
 
       </div>
-    </div>
+    </PageLayout>
   );
 };
 
