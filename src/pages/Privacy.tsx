@@ -16,7 +16,7 @@ const Privacy = () => {
         lineHeight: 1.8
       }}
     >
-      <h1 style={{ color: '#fff', fontSize: '3rem', marginBottom: '2rem', fontFamily: 'var(--font-display)' }}>Privacy Policy</h1>
+      <h1 style={{ color: '#fff', fontSize: 'clamp(2rem, 5vw, 3rem)', marginBottom: '2rem', fontFamily: 'var(--font-display)' }}>Privacy Policy</h1>
       
       <p style={{ marginBottom: '1.5rem' }}><strong>Last Updated: {new Date().toLocaleDateString()}</strong></p>
 

@@ -302,3 +302,13 @@ h2 {
   pointer-events: none;
 }
 
+/* Liquid Card Responsive */
+@media (max-width: 768px) {
+  .liquid-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.5rem;
+    padding: 2rem 1.5rem;
+  }
+}
+

@@ -146,10 +146,10 @@ const Home = () => {
         {/* Services Grid */}
         <section style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 2rem', marginBottom: '12rem' }}>
           <ScrollReveal direction="up">
-            <h3 style={{ fontSize: '2.5rem', marginBottom: '4rem', color: '#fff', textAlign: 'center', letterSpacing: '-0.02em' }}><ScrambleText text="How We Drive Value" /></h3>
+            <h3 style={{ fontSize: 'clamp(2rem, 5vw, 2.5rem)', marginBottom: '4rem', color: '#fff', textAlign: 'center', letterSpacing: '-0.02em' }}><ScrambleText text="How We Drive Value" /></h3>
           </ScrollReveal>
 
-          <ScrollReveal staggerChildren direction="up" className="grid-container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(450px, 1fr))', gap: '3rem' }}>
+          <ScrollReveal staggerChildren direction="up" className="grid-container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '3rem' }}>
             {[
               { icon: <Layers color="#fff" size={32} />, title: "Technical Strategy", desc: "Aligning software architecture directly with your ROI and business objectives to ensure maximum leverage." },
               { icon: <Zap color="#fff" size={32} />, title: "High-Performance Engineering", desc: "Building blazing fast, conversion-optimized applications that leave your competitors behind." },
@@ -171,13 +171,13 @@ const Home = () => {
         {/* Maintenance Plans */}
         <section style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 2rem', marginBottom: '10rem' }}>
           <ScrollReveal direction="up" style={{ textAlign: 'center', marginBottom: '4rem' }}>
-            <h3 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: '#fff', letterSpacing: '-0.02em' }}><ScrambleText text="Retained Engineering" /></h3>
+            <h3 style={{ fontSize: 'clamp(1.8rem, 5vw, 2.5rem)', marginBottom: '1rem', color: '#fff', letterSpacing: '-0.02em' }}><ScrambleText text="Retained Engineering" /></h3>
             <p style={{ color: 'var(--color-text-muted)', fontSize: '1.2rem', maxWidth: '600px', margin: '0 auto' }}>
               We operate as your fractional CTO and dedicated engineering team, ensuring your digital products continuously evolve.
             </p>
           </ScrollReveal>
 
-          <ScrollReveal staggerChildren direction="up" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+          <ScrollReveal staggerChildren direction="up" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 300px), 1fr))', gap: '2rem' }}>
             {/* Professional Plan */}
             <RevealItem>
               <GlassCard style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
@@ -213,7 +213,7 @@ const Home = () => {
         <section style={{ maxWidth: '1000px', margin: '0 auto', padding: '0 2rem' }}>
           <ScrollReveal direction="up">
             <GlassCard style={{ textAlign: 'center', padding: '5rem 3rem', border: '1px solid rgba(255, 140, 0, 0.4)', background: 'linear-gradient(135deg, rgba(255, 140, 0, 0.05) 0%, rgba(20,20,29,0.8) 100%)' }} hoverEffect={false}>
-              <h3 style={{ fontSize: '3rem', marginBottom: '1.5rem', color: '#fff', letterSpacing: '-0.02em' }}><ScrambleText text="Ready to Scale?" /></h3>
+              <h3 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', marginBottom: '1.5rem', color: '#fff', letterSpacing: '-0.02em' }}><ScrambleText text="Ready to Scale?" /></h3>
               <p style={{ color: 'var(--color-text-muted)', fontSize: '1.2rem', lineHeight: 1.8, maxWidth: '700px', margin: '0 auto 3rem' }}>
                 We selectively partner with ambitious companies ready to dominate their market through superior digital experiences.
               </p>

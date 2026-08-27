@@ -89,8 +89,8 @@ const MethodologyCuboid = () => {
                   <div style={{ position: 'absolute', top: '-1rem', right: '-1rem', fontSize: '8rem', fontWeight: 900, color: 'rgba(255, 140, 0, 0.25)', lineHeight: 1, pointerEvents: 'none' }}>
                     {step.num}
                   </div>
-                  <h4 style={{ fontSize: '1.8rem', color: '#fff', marginBottom: '1.5rem', position: 'relative', zIndex: 1 }}>{step.title}</h4>
-                  <p style={{ color: 'var(--color-text-muted)', fontSize: '1.1rem', lineHeight: 1.6, position: 'relative', zIndex: 1 }}>
+                  <h4 style={{ fontSize: 'clamp(1.4rem, 5vw, 1.8rem)', color: '#fff', marginBottom: '1.5rem', position: 'relative', zIndex: 1 }}>{step.title}</h4>
+                  <p style={{ color: 'var(--color-text-muted)', fontSize: 'clamp(0.95rem, 3vw, 1.1rem)', lineHeight: 1.6, position: 'relative', zIndex: 1 }}>
                     {step.desc}
                   </p>
                 </GlassCard>
