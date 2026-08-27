@@ -1,4 +1,4 @@
-import React, { useRef, useState, MouseEvent } from 'react';
+import React, { useRef, useState, type MouseEvent } from 'react';
 import { motion } from 'framer-motion';
 
 interface MagneticButtonProps {
@@ -25,7 +25,7 @@ const MagneticButton: React.FC<MagneticButtonProps> = ({ children, className = '
   const handleMouseEnter = () => setOpacity(1);
 
   // Isolate the child to inject styles and the spotlight directly inside it
-  const child = React.Children.only(children) as React.ReactElement;
+  const child = React.Children.only(children) as React.ReactElement<any>;
   
   const clonedChild = React.cloneElement(child, {
     ref: ref,
