@@ -14,12 +14,15 @@ const GlassCard: React.FC<GlassCardProps> = ({ children, className = '', style =
     <motion.div 
       className={`glass-card ${className}`}
       style={{
-        background: 'rgba(20, 20, 29, 0.4)',
-        backdropFilter: 'blur(16px)',
-        WebkitBackdropFilter: 'blur(16px)',
-        border: '1px solid rgba(255, 140, 0, 0.1)',
-        borderRadius: '16px', // Rounded corners
-        padding: '2rem',
+        background: 'linear-gradient(135deg, rgba(30, 30, 40, 0.7) 0%, rgba(10, 10, 15, 0.4) 100%)',
+        backdropFilter: 'blur(24px)',
+        WebkitBackdropFilter: 'blur(24px)',
+        border: '1px solid rgba(255, 255, 255, 0.08)',
+        borderTop: '1px solid rgba(255, 255, 255, 0.15)',
+        borderLeft: '1px solid rgba(255, 255, 255, 0.15)',
+        borderRadius: '24px',
+        padding: '2.5rem',
+        boxShadow: '0 30px 60px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1)',
         ...style
       }}
       whileHover={hoverEffect ? {

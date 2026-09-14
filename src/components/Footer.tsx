@@ -36,7 +36,7 @@ const Footer = () => {
         <div>
           <h4 style={{ color: '#fff', marginBottom: '1.5rem', letterSpacing: '2px', textTransform: 'uppercase', fontSize: '0.9rem' }}>Explore</h4>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            {['Services', 'Studio', 'Insights'].map(item => (
+            {['Services', 'Work', 'Studio'].map(item => (
               <Link 
                 key={item} 
                 to={`/${item.toLowerCase()}`}

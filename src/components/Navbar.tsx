@@ -24,25 +24,26 @@ const Navbar = () => {
     <>
       <nav className="nav-container" style={{
         position: 'fixed',
-        top: '1rem',
+        top: '1.5rem',
         left: '50%',
         transform: 'translateX(-50%)',
-        width: '95%',
-        maxWidth: '1200px',
+        width: '90%',
+        maxWidth: '1000px',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
         zIndex: 50,
-        background: 'rgba(10, 10, 15, 0.7)',
-        backdropFilter: 'blur(16px)',
-        border: '1px solid rgba(255, 255, 255, 0.05)',
-        borderBottom: '1px solid rgba(255, 140, 0, 0.2)',
-        borderRadius: '8px',
-        padding: '0.5rem 1rem',
+        background: 'linear-gradient(135deg, rgba(20, 20, 30, 0.6) 0%, rgba(5, 5, 10, 0.4) 100%)',
+        backdropFilter: 'blur(20px)',
+        border: '1px solid rgba(255, 255, 255, 0.08)',
+        borderTop: '1px solid rgba(255, 255, 255, 0.15)',
+        borderBottom: '1px solid rgba(255, 140, 0, 0.15)',
+        borderRadius: '100px',
+        padding: '0.75rem 1.5rem',
         opacity: navOpacity,
         pointerEvents: navPointerEvents,
-        transition: 'opacity 0.3s ease, border 0.3s ease',
-        boxShadow: '0 20px 40px rgba(0,0,0,0.5)'
+        transition: 'all 0.4s cubic-bezier(0.22, 1, 0.36, 1)',
+        boxShadow: '0 20px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1)'
       }}>
         {/* Logo / System Menu */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
@@ -65,7 +66,7 @@ const Navbar = () => {
 
         {/* Desktop Nav Links / Modules */}
         <div className="nav-links" style={{ display: 'flex', gap: '2rem' }}>
-          {['Home', 'Services', 'Studio', 'Insights'].map((item) => {
+          {['Home', 'Services', 'Work', 'Studio'].map((item) => {
             const path = item === 'Home' ? '/' : `/${item.toLowerCase()}`;
             return (
             <Link 
@@ -152,7 +153,7 @@ const Navbar = () => {
           <div style={{ fontFamily: 'monospace', color: 'var(--color-text-muted)', marginBottom: '2rem' }}>
             SYSTEM MODULES
           </div>
-          {['Home', 'Services', 'Studio', 'Insights'].map((item) => {
+          {['Home', 'Services', 'Work', 'Studio'].map((item) => {
             const path = item === 'Home' ? '/' : `/${item.toLowerCase()}`;
             return (
             <Link 

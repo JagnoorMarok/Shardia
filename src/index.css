@@ -7,21 +7,31 @@
   padding: 0;
 }
 
-html, body {
-  width: 100%;
-  min-height: 100vh;
-  overflow-x: clip; /* Fixes position: sticky breaking on child elements while still preventing horizontal scroll */
-  background-color: var(--color-bg);
-  color: var(--color-text);
-  font-family: var(--font-sans);
+/* Base Styles */
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #050508; /* Deep rich dark background */
+  color: #e2e8f0;
+  overflow-x: hidden;
+  line-height: 1.6;
 }
 
-@media (pointer: fine) {
-  *, *::before, *::after {
-    cursor: none !important;
-  }
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Typography refinements */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Outfit', 'Inter', sans-serif;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+  color: #ffffff;
 }
 
 a {

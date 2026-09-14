@@ -9,8 +9,8 @@ const CustomCursor: React.FC = () => {
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
 
-  // Spring configuration for smooth trailing
-  const springConfig = { damping: 25, stiffness: 300, mass: 0.5 };
+  // Spring configuration for smooth, organic trailing
+  const springConfig = { damping: 20, stiffness: 200, mass: 0.2 };
   const smoothX = useSpring(cursorX, springConfig);
   const smoothY = useSpring(cursorY, springConfig);
 
@@ -92,14 +92,16 @@ const CustomCursor: React.FC = () => {
           zIndex: 9998,
           x: '-50%',
           y: '-50%',
+          backdropFilter: 'blur(2px)' // Glassmorphism cursor trail
         }}
         animate={{
-          width: isHovering ? '64px' : '32px',
-          height: isHovering ? '64px' : '32px',
-          backgroundColor: isHovering ? 'rgba(255, 140, 0, 0.1)' : 'transparent',
-          borderColor: isHovering ? 'rgba(255, 140, 0, 0.8)' : 'rgba(255, 140, 0, 0.5)'
+          width: isHovering ? '80px' : '32px',
+          height: isHovering ? '80px' : '32px',
+          backgroundColor: isHovering ? 'rgba(255, 140, 0, 0.15)' : 'transparent',
+          borderColor: isHovering ? 'rgba(255, 140, 0, 0.9)' : 'rgba(255, 140, 0, 0.4)',
+          boxShadow: isHovering ? '0 0 20px rgba(255, 140, 0, 0.5)' : 'none'
         }}
-        transition={{ duration: 0.2 }}
+        transition={{ type: 'spring', damping: 20, stiffness: 300 }}
       />
     </>
   );

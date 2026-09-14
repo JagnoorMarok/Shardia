@@ -1,73 +1,66 @@
-
 import { useNavigate } from 'react-router-dom';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import GlassCard from '../components/GlassCard';
 import { Hexagon, Layers, Zap, Code, Cpu, Globe } from 'lucide-react';
 import MagneticButton from '../components/MagneticButton';
 import ScrambleText from '../components/ScrambleText';
-import { useScrollProgress } from '../hooks/useScrollProgress';
 import { ScrollReveal, RevealItem } from '../components/ScrollReveal';
 import MethodologyCuboid from '../components/MethodologyCuboid';
 import LiquidCard from '../components/LiquidCard';
+import TextReveal from '../components/TextReveal';
 
 const Home = () => {
-  const scrollY = useScrollProgress();
-  const vh = typeof window !== 'undefined' ? window.innerHeight : 1000;
-
-  // Calculate narrative progress (0 to 1 over the 300vh spacer)
-  const progress = Math.min(Math.max(scrollY / (3 * vh), 0), 1);
-
-  // Phase opacity calculations (fading in and out sequentially without overlapping)
-  const heroOpacity = progress < 0.95 ? 1 : Math.max(1 - (progress - 0.95) * 20, 0);
-
-  const dbOpacity = progress > 0.3 && progress < 0.6
-    ? (progress < 0.35 ? (progress - 0.3) * 20 : progress > 0.55 ? 1 - (progress - 0.55) * 20 : 1)
-    : 0;
-
-  const cloudOpacity = progress > 0.6 && progress < 0.95
-    ? (progress < 0.65 ? (progress - 0.6) * 20 : progress > 0.9 ? 1 - (progress - 0.9) * 20 : 1)
-    : 0;
+  const { scrollY } = useScroll();
   const navigate = useNavigate();
 
+  // Scroll animations for hero section (fade out over first 400px of scroll)
+  const heroOpacity = useTransform(scrollY, [0, 400], [1, 0]);
+  const heroY = useTransform(scrollY, [0, 400], [0, -100]);
 
   return (
     <div>
-      {/* Hero Section (Always fixed, but text fades in/out based on phase) */}
-      <section style={{ position: 'fixed', width: '100vw', height: '100vh', zIndex: 10, pointerEvents: 'none', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-
-        {/* Phase 1: Landing Interface */}
-        <div className="hero-content" style={{
+      {/* Hero Section */}
+      <motion.section 
+        style={{ 
           opacity: heroOpacity,
-          transition: 'opacity 0.5s'
-        }}>
-          {/* Mobile Only: Small Top-Left Branding */}
+          y: heroY,
+          position: 'fixed', 
+          width: '100vw', 
+          height: '100vh', 
+          zIndex: 10, 
+          pointerEvents: 'none', 
+          display: 'flex', 
+          flexDirection: 'column', 
+          justifyContent: 'center', 
+          alignItems: 'center' 
+        }}
+      >
+        <div className="hero-content">
           <div className="hero-mobile-branding">
             <h1>SHARDIA</h1>
             <h2>Web Solutions Agency</h2>
           </div>
 
-          {/* Mobile Only: Small Bottom-Center Tagline in Glass */}
           <div className="hero-mobile-tagline">
             <p>
               Engineering scalable web applications, immersive digital experiences, and robust technical infrastructure for ambitious brands.
             </p>
           </div>
 
-          {/* Left Side: Identity */}
           <div className="hero-left">
-            <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', margin: 0, color: '#fff', letterSpacing: '-0.02em', lineHeight: 1 }}>SHARDIA</h1>
+            <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', margin: 0, color: '#fff', letterSpacing: '-0.02em', lineHeight: 1 }}>SHARDIA</h1>
             <h2 style={{ fontSize: 'clamp(0.8rem, 2vw, 1rem)', color: 'rgba(255,140,0,1)', textTransform: 'uppercase', letterSpacing: '2px', margin: '0.5rem 0 2rem', fontWeight: 600 }}>Web Solutions Agency</h2>
-            <p style={{ color: 'var(--color-text-muted)', fontSize: '1.1rem', lineHeight: 1.6 }}>
+            <p style={{ color: 'var(--color-text-muted)', fontSize: '1.1rem', lineHeight: 1.6, maxWidth: '400px' }}>
               Engineering scalable web applications, immersive digital experiences, and robust technical infrastructure for ambitious brands.
             </p>
           </div>
           
-          {/* Right Side: Tech Specs */}
           <div className="hero-right">
             <div style={{ color: 'rgba(255,140,0,1)', fontSize: '0.85rem', marginBottom: '1.5rem', letterSpacing: '2px' }}>[ CORE SYSTEMS ]</div>
             
             <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '2rem', color: '#fff', marginBottom: '1rem', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '0.5rem' }}>
               <span style={{ color: 'var(--color-text-muted)' }}>STACK</span>
-              <span style={{ fontWeight: 600 }}>REACT / NODE / WEBGL</span>
+              <span style={{ fontWeight: 600 }}>REACT / NEXT / WEBGL</span>
             </div>
             
             <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '2rem', color: '#fff', marginBottom: '1rem', borderBottom: '1px solid rgba(255,255,255,0.05)', paddingBottom: '0.5rem' }}>
@@ -82,45 +75,21 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Scroll Hint */}
-        <div style={{
-          position: 'absolute', bottom: '2rem', textAlign: 'center',
-          opacity: heroOpacity * 0.5,
-          transition: 'opacity 0.1s'
-        }}>
-          <p style={{ fontFamily: 'monospace', letterSpacing: '0.2em', fontSize: '0.8rem', color: '#fff' }}>
+        <motion.div 
+          animate={{ y: [0, 10, 0] }} 
+          transition={{ repeat: Infinity, duration: 2 }}
+          style={{
+            position: 'absolute', bottom: '2rem', textAlign: 'center'
+          }}
+        >
+          <p style={{ fontFamily: 'monospace', letterSpacing: '0.2em', fontSize: '0.8rem', color: '#fff', opacity: 0.7 }}>
             SCROLL TO EXPLORE // SHARDIA
           </p>
-        </div>
-
-        {/* Phase 2: Database Connects */}
-        <div style={{
-          position: 'absolute',
-          opacity: dbOpacity,
-          transition: 'opacity 0.1s',
-          textAlign: 'center'
-        }}>
-          <p style={{ color: 'rgba(255, 140, 0, 1)', fontFamily: 'monospace', letterSpacing: '2px', fontSize: '1.2rem' }}>
-            {">"} CONNECTING DATABASE... [OK]
-          </p>
-        </div>
-
-        {/* Phase 3: Cloud Appears */}
-        <div style={{
-          position: 'absolute',
-          opacity: cloudOpacity,
-          transition: 'opacity 0.1s',
-          textAlign: 'center'
-        }}>
-          <p style={{ color: 'rgba(100, 200, 255, 1)', fontFamily: 'monospace', letterSpacing: '2px', fontSize: '1.2rem' }}>
-            {">"} PROVISIONING CLOUD INFRASTRUCTURE... [OK]
-          </p>
-        </div>
-
-      </section>
+        </motion.div>
+      </motion.section>
 
       {/* Spacer to allow scroll narrative to play out before content. */}
-      <div style={{ height: '400vh', width: '100%', pointerEvents: 'none' }} />
+      <div style={{ height: '100vh', width: '100%', pointerEvents: 'none' }} />
 
       {/* Main Content Area */}
       <div style={{
@@ -130,12 +99,11 @@ const Home = () => {
         paddingTop: '15vh',
         paddingBottom: '10rem',
       }}>
-
         {/* Intro Section */}
         <section style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '0 2rem', marginBottom: '8rem' }}>
-          <ScrollReveal direction="up" className="max-w-4xl text-center" style={{ maxWidth: '800px', textAlign: 'center' }}>
+          <ScrollReveal direction="none" className="max-w-4xl text-center" style={{ maxWidth: '800px', textAlign: 'center' }}>
             <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', marginBottom: '1.5rem', color: '#fff', textShadow: '0 0 20px rgba(255,140,0,0.3)', letterSpacing: '-0.02em', lineHeight: 1.1 }}>
-              Engineering Digital <br /><span style={{ color: 'rgba(255, 140, 0, 1)' }}>Business Growth</span>
+              <TextReveal text="Engineering Digital Business Growth" />
             </h2>
             <p style={{ color: 'var(--color-text-muted)', fontSize: '1.2rem', lineHeight: 1.8 }}>
               We don't just write code—we build strategic digital assets. As a premium software agency, Shardia partners with forward-thinking brands to launch high-performance web applications that drive revenue and scale effortlessly.
@@ -238,7 +206,6 @@ const Home = () => {
             </GlassCard>
           </ScrollReveal>
         </section>
-
       </div>
     </div>
   );
