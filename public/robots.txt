@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Host
+Host: https://shardia.tech
+
+# Sitemap
+Sitemap: https://shardia.tech/sitemap.xml

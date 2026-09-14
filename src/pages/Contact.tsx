@@ -3,6 +3,8 @@ import GlassCard from '../components/GlassCard';
 import { ScrollReveal } from '../components/ScrollReveal';
 import { motion } from 'framer-motion';
 import MagneticButton from '../components/MagneticButton';
+import SEO from '../components/SEO';
+import { MapPin, Mail, Phone, Clock } from 'lucide-react';
 
 const Contact = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -101,13 +103,86 @@ ${formData.description}
     letterSpacing: '1px'
   };
 
+  const contactSchema = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "Contact Shardia | Best Web Developer in Jalandhar, Punjab",
+    "description": "Get in touch with Shardia for custom web development, full-stack React/Next.js engineering, and digital growth consulting in Jalandhar, Punjab.",
+    "url": "https://shardia.tech/contact",
+    "mainEntity": {
+      "@type": "LocalBusiness",
+      "name": "Shardia",
+      "telephone": "+919814078213",
+      "email": "jagnoormarok@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Jalandhar",
+        "addressRegion": "Punjab",
+        "postalCode": "144001",
+        "addressCountry": "IN"
+      }
+    }
+  };
+
   return (
-    <div style={{ paddingTop: '15vh', minHeight: '80vh', paddingBottom: '10rem', paddingLeft: '2rem', paddingRight: '2rem', maxWidth: '800px', margin: '0 auto' }}>
+    <div style={{ paddingTop: '15vh', minHeight: '80vh', paddingBottom: '10rem', paddingLeft: '2rem', paddingRight: '2rem', maxWidth: '900px', margin: '0 auto' }}>
+      <SEO 
+        title="Contact Best Web Developer in Jalandhar, Punjab | Shardia"
+        description="Looking to hire the best web developer in Jalandhar or Punjab? Contact Shardia for high-performance websites, custom web apps, and digital consulting."
+        canonical="/contact"
+        keywords="hire web developer jalandhar, contact shardia, web developer in jalandhar, web development company in jalandhar, software developer punjab"
+        schema={contactSchema}
+      />
+
       <ScrollReveal>
-        <h1 style={{ fontSize: 'clamp(3rem, 6vw, 4.5rem)', marginBottom: '1rem', color: '#fff', textAlign: 'center', letterSpacing: '-0.02em' }}>Initiate a Project</h1>
-        <p style={{ fontSize: '1.2rem', color: 'var(--color-text-muted)', marginBottom: '4rem', textAlign: 'center', lineHeight: 1.8 }}>
-          Provide us with some initial details. We review every inquiry to ensure we are the right technical partner for your business goals.
-        </p>
+        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'rgba(255,140,0,0.1)', border: '1px solid rgba(255,140,0,0.3)', borderRadius: '20px', padding: '0.3rem 0.8rem', marginBottom: '1rem', color: 'rgba(255,140,0,1)', fontSize: '0.85rem', fontWeight: 600 }}>
+            <MapPin size={14} /> JALANDHAR, PUNJAB • LOCAL & GLOBAL INQUIRIES
+          </div>
+          <h1 style={{ fontSize: 'clamp(2.5rem, 6vw, 4rem)', marginBottom: '1rem', color: '#fff', letterSpacing: '-0.02em' }}>
+            Initiate a Project
+          </h1>
+          <p style={{ fontSize: '1.15rem', color: 'var(--color-text-muted)', maxWidth: '650px', margin: '0 auto', lineHeight: 1.8 }}>
+            Looking for the best web developer in Jalandhar or Punjab? Share your project vision below and we'll analyze your requirements to craft a winning digital solution.
+          </p>
+        </div>
+
+        {/* Quick Contact Badges */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+          gap: '1rem',
+          marginBottom: '3rem'
+        }}>
+          <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '12px', padding: '1rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <MapPin color="rgba(255,140,0,1)" size={20} style={{ flexShrink: 0 }} />
+            <div>
+              <div style={{ color: '#fff', fontSize: '0.85rem', fontWeight: 600 }}>Location</div>
+              <div style={{ color: 'var(--color-text-muted)', fontSize: '0.8rem' }}>Jalandhar, Punjab 144001</div>
+            </div>
+          </div>
+          <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '12px', padding: '1rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <Mail color="rgba(255,140,0,1)" size={20} style={{ flexShrink: 0 }} />
+            <div>
+              <div style={{ color: '#fff', fontSize: '0.85rem', fontWeight: 600 }}>Direct Email</div>
+              <div style={{ color: 'var(--color-text-muted)', fontSize: '0.8rem' }}>jagnoormarok@gmail.com</div>
+            </div>
+          </div>
+          <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '12px', padding: '1rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <Phone color="rgba(255,140,0,1)" size={20} style={{ flexShrink: 0 }} />
+            <div>
+              <div style={{ color: '#fff', fontSize: '0.85rem', fontWeight: 600 }}>Phone / WhatsApp</div>
+              <div style={{ color: 'var(--color-text-muted)', fontSize: '0.8rem' }}>+91 9814078213</div>
+            </div>
+          </div>
+          <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)', borderRadius: '12px', padding: '1rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <Clock color="rgba(255,140,0,1)" size={20} style={{ flexShrink: 0 }} />
+            <div>
+              <div style={{ color: '#fff', fontSize: '0.85rem', fontWeight: 600 }}>Response Time</div>
+              <div style={{ color: 'var(--color-text-muted)', fontSize: '0.8rem' }}>Under 24 Hours</div>
+            </div>
+          </div>
+        </div>
       </ScrollReveal>
 
       <ScrollReveal direction="up" delay={0.2}>
@@ -127,7 +202,7 @@ ${formData.description}
               </div>
               <h2 style={{ color: '#fff', fontSize: '2rem', marginBottom: '1rem' }}>Inquiry Received</h2>
               <p style={{ color: 'var(--color-text-muted)', fontSize: '1.1rem', marginBottom: '2rem' }}>
-                Thank you for reaching out. One of our partners will review your details and get back to you within 24 hours.
+                Thank you for reaching out. One of our lead engineers will review your details and get back to you within 24 hours.
               </p>
               <button
                 onClick={() => setIsSubmitted(false)}
@@ -155,10 +230,11 @@ ${formData.description}
                   <label style={labelStyle}>Project Type</label>
                   <select name="projectType" value={formData.projectType} onChange={handleChange} style={inputStyle} required>
                     <option value="" disabled>Select a type...</option>
-                    <option value="Web Development">Web Application Development</option>
-                    <option value="App Development">Mobile App Development</option>
-                    <option value="3D / WebGL">WebGL / Experiential</option>
-                    <option value="Systems Architecture">Backend / Systems Architecture</option>
+                    <option value="Custom Website Development">Custom Website Development</option>
+                    <option value="React / Next.js Web App">React / Next.js Web App</option>
+                    <option value="E-Commerce Platform">E-Commerce Platform</option>
+                    <option value="UI/UX & Product Design">UI/UX & Product Design</option>
+                    <option value="Technical SEO & Speed Optimization">Technical SEO & Speed Optimization</option>
                     <option value="Other">Other</option>
                   </select>
                 </div>
@@ -168,10 +244,11 @@ ${formData.description}
                   <label style={labelStyle}>Budget</label>
                   <select name="budget" value={formData.budget} onChange={handleChange} style={inputStyle} required>
                     <option value="" disabled>Select a range...</option>
-                    <option value="₹2L - ₹5L">₹15,000 - ₹25,000</option>
-                    <option value="₹5L - ₹15L">₹25,000- ₹50,000</option>
-                    <option value="₹15L+">₹50,000+</option>
-                    <option value="Undecided">Undecided</option>
+                    <option value="₹15,000 - ₹25,000">₹15,000 - ₹25,000</option>
+                    <option value="₹25,000 - ₹50,000">₹25,000 - ₹50,000</option>
+                    <option value="₹50,000 - ₹1,00,000">₹50,000 - ₹1,00,000</option>
+                    <option value="₹1,00,000+">₹1,00,000+</option>
+                    <option value="Undecided">Undecided / Retainer</option>
                   </select>
                 </div>
 
@@ -180,9 +257,9 @@ ${formData.description}
                   <label style={labelStyle}>Timeline</label>
                   <select name="timeline" value={formData.timeline} onChange={handleChange} style={inputStyle} required>
                     <option value="" disabled>Select timeline...</option>
-                    <option value="ASAP">ASAP</option>
+                    <option value="ASAP (1-2 weeks)">ASAP (1-2 weeks)</option>
+                    <option value="2-4 weeks">2-4 weeks</option>
                     <option value="1-3 months">1-3 months</option>
-                    <option value="3-6 months">3-6 months</option>
                     <option value="Flexible">Flexible</option>
                   </select>
                 </div>
@@ -191,33 +268,33 @@ ${formData.description}
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '2rem' }}>
                 {/* Business Name */}
                 <div>
-                  <label style={labelStyle}>Business Name</label>
-                  <input type="text" name="businessName" value={formData.businessName} onChange={handleChange} style={inputStyle} required placeholder="Nexus Dynamics" />
+                  <label style={labelStyle}>Business / Personal Name</label>
+                  <input type="text" name="businessName" value={formData.businessName} onChange={handleChange} style={inputStyle} required placeholder="Your Brand or Company" />
                 </div>
 
                 {/* Phone */}
                 <div>
-                  <label style={labelStyle}>Phone</label>
+                  <label style={labelStyle}>Phone (WhatsApp)</label>
                   <input type="tel" name="phone" value={formData.phone} onChange={handleChange} style={inputStyle} placeholder="+91 9814078213" />
                 </div>
 
                 {/* Email */}
                 <div>
-                  <label style={labelStyle}>Email</label>
-                  <input type="email" name="email" value={formData.email} onChange={handleChange} style={inputStyle} required placeholder="jagnoormarok@gmail.com" />
+                  <label style={labelStyle}>Email Address</label>
+                  <input type="email" name="email" value={formData.email} onChange={handleChange} style={inputStyle} required placeholder="you@company.com" />
                 </div>
               </div>
 
               {/* Project Description */}
               <div>
-                <label style={labelStyle}>Describe your business problem</label>
+                <label style={labelStyle}>Describe your business requirements</label>
                 <textarea
                   name="description"
                   value={formData.description}
                   onChange={handleChange}
                   style={{ ...inputStyle, minHeight: '150px', resize: 'vertical' }}
                   required
-                  placeholder="Tell us about the challenges you're facing, your goals, and technical requirements..."
+                  placeholder="Tell us about the project goals, target audience, technical needs, and timeline..."
                 />
               </div>
 

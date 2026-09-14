@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { ScrollReveal } from '../components/ScrollReveal';
 import Footer from '../components/Footer';
+import SEO from '../components/SEO';
 
 const projects = [
   { name: "Jagnoor Marok", tag: "Personal Portfolio", img: "linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)", metric: "jagnoormarok.dev", link: "https://jagnoormarok.dev" },
@@ -16,6 +17,12 @@ const Work = () => {
       transition={{ duration: 0.5 }}
       style={{ width: '100%', minHeight: '100vh', position: 'relative' }}
     >
+      <SEO 
+        title="Portfolio & Projects | Best Web Developer in Jalandhar, Punjab | Shardia"
+        description="Explore featured web applications, high-performance platforms, and custom digital systems engineered by Shardia, the top web developer in Jalandhar, Punjab."
+        canonical="/work"
+        keywords="web developer jalandhar portfolio, best web developer in jalandhar projects, web development showcase punjab, custom react web apps jalandhar, shardia work"
+      />
       {/* Sticky Header / Background Screen */}
       <div style={{ 
         position: 'sticky', 
