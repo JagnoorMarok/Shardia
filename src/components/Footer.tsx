@@ -21,9 +21,9 @@ const Footer = () => {
       }}>
         {/* Brand */}
         <div>
-          <h3 style={{ 
-            fontFamily: 'var(--font-display)', 
-            fontSize: '1.5rem', 
+          <h3 style={{
+            fontFamily: 'var(--font-display)',
+            fontSize: '1.5rem',
             marginBottom: '1rem',
             color: '#fff',
             textShadow: '0 0 10px rgba(255, 120, 0, 0.3)'
@@ -42,8 +42,8 @@ const Footer = () => {
           <h4 style={{ color: '#fff', marginBottom: '1.5rem', letterSpacing: '2px', textTransform: 'uppercase', fontSize: '0.9rem' }}>Explore</h4>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             {['Services', 'Work', 'Studio', 'Contact'].map(item => (
-              <Link 
-                key={item} 
+              <Link
+                key={item}
                 to={`/${item.toLowerCase()}`}
                 style={{ color: 'var(--color-text-muted)', transition: 'var(--transition-normal)' }}
                 onMouseOver={(e) => e.currentTarget.style.color = '#fff'}
@@ -59,11 +59,17 @@ const Footer = () => {
         <div>
           <h4 style={{ color: '#fff', marginBottom: '1.5rem', letterSpacing: '2px', textTransform: 'uppercase', fontSize: '0.9rem' }}>Connect</h4>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', color: 'var(--color-text-muted)', fontSize: '0.95rem' }}>
-            <a href="mailto:jagnoormarok@gmail.com" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--color-text-muted)', textDecoration: 'none' }} onMouseOver={e=>e.currentTarget.style.color='#fff'} onMouseOut={e=>e.currentTarget.style.color='var(--color-text-muted)'}>
+            <a href="mailto:jagnoormarok@gmail.com" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--color-text-muted)', textDecoration: 'none' }} onMouseOver={e => e.currentTarget.style.color = '#fff'} onMouseOut={e => e.currentTarget.style.color = 'var(--color-text-muted)'}>
               <Mail size={16} color="rgba(255,140,0,1)" /> jagnoormarok@gmail.com
             </a>
-            <a href="tel:+919814078213" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--color-text-muted)', textDecoration: 'none' }} onMouseOver={e=>e.currentTarget.style.color='#fff'} onMouseOut={e=>e.currentTarget.style.color='var(--color-text-muted)'}>
+            <a href="tel:+919814078213" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--color-text-muted)', textDecoration: 'none' }} onMouseOver={e => e.currentTarget.style.color = '#fff'} onMouseOut={e => e.currentTarget.style.color = 'var(--color-text-muted)'}>
               <Phone size={16} color="rgba(255,140,0,1)" /> +91 9814078213
+            </a>
+            <a href="mailto:t.karmann.singh@gmail.com" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--color-text-muted)', textDecoration: 'none' }} onMouseOver={e => e.currentTarget.style.color = '#fff'} onMouseOut={e => e.currentTarget.style.color = 'var(--color-text-muted)'}>
+              <Mail size={16} color="rgba(255,140,0,1)" />t.karmann.singh@gmail.com
+            </a>
+            <a href="tel:+918725047467" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--color-text-muted)', textDecoration: 'none' }} onMouseOver={e => e.currentTarget.style.color = '#fff'} onMouseOut={e => e.currentTarget.style.color = 'var(--color-text-muted)'}>
+              <Phone size={16} color="rgba(255,140,0,1)" /> +91 8725047467
             </a>
             <p style={{ marginTop: '0.5rem', fontSize: '0.85rem', color: 'rgba(255,255,255,0.4)', lineHeight: 1.5 }}>
               Available for new projects & consultations in Jalandhar, Punjab, and remote worldwide.
@@ -102,8 +108,8 @@ const Footer = () => {
       }}>
         <p>&copy; {new Date().getFullYear()} Shardia (Jagnoor Marok). All rights reserved.</p>
         <div style={{ display: 'flex', gap: '2rem' }}>
-          <Link to="/privacy" style={{ cursor: 'pointer', transition: 'color 0.2s', color: 'var(--color-text-muted)' }} onMouseOver={e=>e.currentTarget.style.color='#fff'} onMouseOut={e=>e.currentTarget.style.color='var(--color-text-muted)'}>Privacy Policy</Link>
-          <Link to="/terms" style={{ cursor: 'pointer', transition: 'color 0.2s', color: 'var(--color-text-muted)' }} onMouseOver={e=>e.currentTarget.style.color='#fff'} onMouseOut={e=>e.currentTarget.style.color='var(--color-text-muted)'}>Terms of Service</Link>
+          <Link to="/privacy" style={{ cursor: 'pointer', transition: 'color 0.2s', color: 'var(--color-text-muted)' }} onMouseOver={e => e.currentTarget.style.color = '#fff'} onMouseOut={e => e.currentTarget.style.color = 'var(--color-text-muted)'}>Privacy Policy</Link>
+          <Link to="/terms" style={{ cursor: 'pointer', transition: 'color 0.2s', color: 'var(--color-text-muted)' }} onMouseOver={e => e.currentTarget.style.color = '#fff'} onMouseOut={e => e.currentTarget.style.color = 'var(--color-text-muted)'}>Terms of Service</Link>
         </div>
       </div>
     </footer>
